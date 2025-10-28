@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: n8nio/n8n:1.118.1
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
+      - TZ=${TZ}
+    volumes:
+      - n8n-storage:/home/node/.n8n
+    networks:
+      - n8n-network
+
+volumes:
+  n8n-storage:
+
+networks:
+  n8n-network:
+    driver: bridge
